@@ -69,7 +69,8 @@ class CarsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $car = Car::findOrFail($id);
+        return view('pages.cars-edit', compact('car'));
     }
 
     /**
@@ -81,7 +82,16 @@ class CarsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $validateData = $request->validate([
+
+        'brand' => 'required',
+        'model' => 'required',
+        'displacement' => 'required|integer',
+        'max_speed' => 'required|integer'
+      ]);
+
+      Car::whereId($id)->update($validateData);
+      return redirect('cars');
     }
 
     /**
