@@ -102,6 +102,7 @@ class CarsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Car::whereId($id)->delete();
+        return redirect('cars');
     }
 }

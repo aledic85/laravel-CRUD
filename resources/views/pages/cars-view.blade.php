@@ -10,6 +10,7 @@
       <th>Displacement</th>
       <th>Max Speed</th>
       <th>Edit</th>
+      <th>Delete</th>
     </tr>
 @foreach ($cars as $car)
     <tr>
@@ -19,6 +20,13 @@
       <td>{{$car->displacement}}</td>
       <td>{{$car->max_speed}}</td>
       <td><a href="{{route('cars.edit', $car->id)}}"><i class="fas fa-edit"></i></a></td>
+      <td>
+        <form action="{{route('cars.destroy', $car->id)}}" method="post">
+          @csrf
+          @method('DELETE')
+          <button type="submit" name="button"><i class="fas fa-trash-alt"></i></button>  
+        </form>
+      </td>
     </tr>
 @endforeach
   </table>
